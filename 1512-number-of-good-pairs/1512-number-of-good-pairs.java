@@ -14,7 +14,7 @@ class Solution {
         */
         /*
         optimised approach
-        tc -> o(n) sc -> o(n)
+        tc -> o(n) sc -> o(101) -> o(1)
         
 We declared an empty array of size 101 since 101 is the max number given in constraints.
 The temp array looks like [0, 0, 0, 0, 0, ... , 0] now.
