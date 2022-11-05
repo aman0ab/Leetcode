@@ -2,7 +2,7 @@ class Solution {
     public int numIdenticalPairs(int[] nums) {
         //Brute force approach 
         // tc -> o(n^2) sc -> o(1)
-       /*int ans = 0;
+        int ans = 0;
         for(int i = 0; i < nums.length; ++i){
             for(int j = i + 1; j < nums.length; ++j){
                 if(nums[i] == nums[j]){
@@ -11,62 +11,29 @@ class Solution {
             }
         }
         return ans;
-        */
-        /*
-        optimised approach
-        tc -> o(n) sc -> o(101) -> o(1)
         
-We declared an empty array of size 101 since 101 is the max number given in constraints.
-The temp array looks like [0, 0, 0, 0, 0, ... , 0] now.
+    //Optimised approach    
+The trick to solving this problem is to realize that for any given number, the number of "good pairs" that can be made with this number is the number of times we have seen this number previously in the array.
 
-We are now looping in the given nums array and going to each element and adding it's temp count.
+With the above logic, we just need to iterate over the input and count the number of times we have seen a given number so far, then add that to the total result before incrementing the count for the current number.
 
-Let's understand this by an example.
-Given nums = [1,2,3,1,1,3]
-when i=0, we will check nums[i] which is num[0] = 1.
-Then we will go to temp[nums[i]] which is temp[1] = 0 for now. So we will add it to count 0 + 0 = 0.
-Then we will perform temp[1]++ which means we will make the temp array look like [0,1,0,0,0...0]
+Something very important to mention, is that we can only get away with using an array of size 101 because the problem constraints state that no number in the input will be greater than 100. If this constaint didn't exist, we could use something like a HashMap to keep track of the counts.
 
-Now, we will have i =1:
-nums[1]=2
-temp[2]++
-count = 0 + 0
-Now the temp array will look like [0, 1, 1, 0, 0, ... , 0]
+Using a HashMap instead of the array is perfectly acceptable and does yield the same runtime, but in practice will be much slower because of overhead from the HashMap. To recap, the use of a HashMap would not change the runtime complexity but it does make the practical performance worse.
 
-i = 2
-nums[2] = 3
-temp[3]++
-count = 0 + 0
-Now the temp array will look like [0, 1, 1, 1, 0, 0, ... , 0]
+Runtime Complexity - O(N)
+Memory Complexity - O(1)
+where N is the size of the input array.
 
-Now for i = 3
-nums[3] = 1
-temp[1]++
-count = 0 + 1
-Now the temp array will look like [0, 2, 1, 1, 0, 0, ... , 0]
-
-Now for i = 4
-nums[4] = 1
-temp[1]++
-count = 1 + 2
-Now the temp array will look like [0, 3, 1, 1, 0, 0, ... , 0]
-
-For i = 5
-nums[5] = 3
-temp[3]++
-count = 3 + 1
-Now the temp array will look like [0, 3, 1, 2, 0, ... , 0]
-
-We will return count which is 4
-*/
-
-        int[] temp = new int[101];
+    public int numIdenticalPairs(int[] nums) {
+        int[] counts = new int[101];
         
-        int count = 0;
-        
-        for (int i = 0; i < nums.length; i++) {
-            count += temp[nums[i]]++;
+        int toReturn = 0;
+        for(int num : nums) {
+            toReturn += counts[num];
+            counts[num]++;
         }
-        return count;
+        
+        return toReturn;
     }
-}
+
