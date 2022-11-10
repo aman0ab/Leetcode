@@ -1,2 +1,2 @@
-# Leetcode with Explanation Solution
+# Leetcode
 Practising of LeetCode questions to ace the coding interview!
