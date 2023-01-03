@@ -5,9 +5,9 @@ class Solution {
         for(int i = nums.length - 1; i >= 2; --i){
             if(nums[i] < nums[i - 1] + nums[i - 2]){
                 peri += nums[i] + nums[i - 1] + nums[i - 2];
-                break;
+                return peri;
             }
         }
-        return peri;
+       return 0;
     }
 }
