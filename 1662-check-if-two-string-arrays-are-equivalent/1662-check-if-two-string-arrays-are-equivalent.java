@@ -1,12 +1,14 @@
 class Solution {
     public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
-        StringBuilder sb1 = new StringBuilder(), sb2 = new StringBuilder();
-        for(String word: word1)
-            sb1.append(word);
-        
-        for(String word: word2)
-            sb2.append(word);
-        
-        return sb1.toString().equals(sb2.toString());
+        String a = "";
+        String b = "";
+        for(String s1 : word1){
+            a += s1;
+        }
+        for(String s2 : word2){
+            b += s2;
+        }
+        if(a.equals(b)) return true;
+        return false;
     }
 }
