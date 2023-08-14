@@ -6,11 +6,10 @@ class Solution {
             int j = arr[i].charAt(arr[i].length() - 1) - '0';
             tempArr[j - 1] = arr[i].substring(0,arr[i].length() - 1);
         }
-        String sb = "";
+        StringBuilder sb = new StringBuilder();
         for(String s1 : tempArr){
-            sb += s1 + " ";
+            sb.append(s1).append(" ");
         }
-       sb = sb.trim();
-        return sb;
+        return sb.toString().trim();
     }
 }
